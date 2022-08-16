@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "type": "dairies"
+  },
+  {
+    "id": 2,
+    "type": "meat, eggs and fish"
+  },
+  {
+    "id": 3,
+    "type": "tubers, pulses and nuts"
+  },
+  {
+    "id": 4,
+    "type": "vegetables and greens"
+  },
+  {
+    "id": 5,
+    "type": "fruits"
+  },
+  {
+    "id": 6,
+    "type": "bread, pasta, sugar, sweets"
+  },
+  {
+    "id": 7,
+    "type": "oils and fats"
+  }
+]

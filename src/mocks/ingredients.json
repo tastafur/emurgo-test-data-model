@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Mozzarella",
+    "calories": 110
+  },
+  {
+    "id": 2,
+    "name": "Tomato",
+    "calories": 70
+  },
+  {
+    "id": 3,
+    "name": "Albacha",
+    "calories": 30
+  },
+  {
+    "id": 4,
+    "name": "Garlic",
+    "calories": 50
+  },
+  {
+    "id": 5,
+    "name": "Oregano",
+    "calories": 50
+  },
+  {
+    "id": 6,
+    "name": "Spanish Ham",
+    "calories": 150
+  },
+  {
+    "id": 7,
+    "name": "Spicy salami",
+    "calories": 150
+  },
+  {
+    "id": 8,
+    "name": "Bacon",
+    "calories": 125
+  },
+  {
+    "id": 9,
+    "name": "Onion",
+    "calories": 60
+  }
+]

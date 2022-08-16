@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Margarita",
+    "ingredients": [1, 2, 3]
+  },
+  {
+    "id": 2,
+    "name": "Prosciutto",
+    "ingredients": [1, 56, 2]
+  },
+  {
+    "id": 3,
+    "name": "Napolitana",
+    "ingredients": [1, 2, 4, 5]
+  },
+  {
+    "id": 4,
+    "name": "Diavola",
+    "ingredients": [1, 2, 7]
+  },
+  {
+    "id": 5,
+    "name": "Cavese",
+    "ingredients": [1, 2, 8, 9]
+  }
+]
