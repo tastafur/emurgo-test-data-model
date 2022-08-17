@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Ruben Romero",
+    "pizzas": [1, 2]
+  },
+  {
+    "id": 2,
+    "name": "Juan Rodriguez",
+    "pizzas": [3, 4]
+  },
+  {
+    "id": 3,
+    "name": "Pedro Martinez",
+    "pizzas": [5, 6]
+  },
+  {
+    "id": 4,
+    "name": "Alejandra Espinosa",
+    "pizzas": [7]
+  }
+]

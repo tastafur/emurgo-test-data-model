@@ -1,7 +1,7 @@
 export const statusTypes = {
   PENDING: 'pending',
   IN_PROCESS: 'in-process',
-  DONE: 'DONE',
+  DONE: 'done',
 };
 
 export type pizzaType = {
@@ -9,6 +9,6 @@ export type pizzaType = {
   status: keyof typeof statusTypes;
   recipe: number;
   removeIngredients: number[];
-  doubleIngredientes: number[];
+  doubleIngredients: number[];
   calories: number;
 };
