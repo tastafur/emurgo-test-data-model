@@ -1,10 +1,16 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import {persistStore, persistReducer} from 'redux-persist';
 
-import rootReducer from './reducers';
+import reduxReset from 'redux-reset';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MMKV} from 'react-native-mmkv';
+
+import rootReducer from './reducers';
+import rootSagas from './sagas';
+
+import {CLEAN_STATE_APP} from './actions/clean';
 
 let mmkvStorage = {};
 
@@ -36,10 +42,27 @@ const persistConfig = {
 // @ts-ignore
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+const sagaMiddleware = createSagaMiddleware();
+
+const composeEnhancers = __DEV__
+  ? // @ts-ignore
+    (global.window && global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose
+  : compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(sagaMiddleware),
+  reduxReset(CLEAN_STATE_APP),
+);
+
 export const configureStore = () => {
-  const store = createStore(persistedReducer);
+  const store = createStore(persistedReducer, enhancer);
 
-  const persitor = persistStore(store);
+  sagaMiddleware.run(rootSagas);
 
-  return {store, persitor};
+  const persistor = persistStore(store);
+
+  return {store, persistor};
 };
+
+export type RootState = ReturnType<typeof rootReducer>;

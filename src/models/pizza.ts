@@ -4,9 +4,11 @@ export const statusTypes = {
   DONE: 'done',
 };
 
+type Keys = keyof typeof statusTypes;
+
 export type pizzaType = {
   id: number;
-  status: keyof typeof statusTypes;
+  status: typeof statusTypes[Keys];
   recipe: number;
   removeIngredients: number[];
   doubleIngredients: number[];
