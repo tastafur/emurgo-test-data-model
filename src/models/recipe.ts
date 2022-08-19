@@ -1,3 +1,5 @@
+import {ingredientFormatDrownType} from './ingredient';
+
 export type recipeType = {
   id: number;
   name: string;
@@ -7,6 +9,6 @@ export type recipeType = {
 export type recipeFormatDrownType = {
   value: number;
   label: string;
-  ingredients: number[];
+  ingredients: ingredientFormatDrownType[];
   allergens?: number[];
 };

@@ -5,3 +5,8 @@ export type ingredientType = {
   foodType: number;
   allergen?: number;
 };
+
+export type ingredientFormatDrownType = {
+  value: number;
+  label: string;
+};

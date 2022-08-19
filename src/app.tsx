@@ -3,6 +3,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {navigationRef} from './navigationActions';
 
 type RootStackParamList = {
   Home: undefined;
@@ -22,7 +23,9 @@ import OrderingScreen from './screens/ordering';
 
 function App() {
   return (
-    <NavigationContainer onReady={() => RNBootSplash.hide({fade: true})}>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => RNBootSplash.hide({fade: true})}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"

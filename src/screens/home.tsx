@@ -8,18 +8,16 @@
  * @format
  */
 
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {FloatingAction} from 'react-native-floating-action';
 import {
-  View,
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Modal,
   FlatList,
   Text,
-  Pressable,
   useColorScheme,
+  View,
 } from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -124,6 +122,7 @@ const Home = ({navigation}: PropsHome) => {
           </Text>
         }
         ListHeaderComponent={<Header />}
+        ListFooterComponent={<View style={styles.footer} />}
         scrollEnabled={true}
         data={orders}
         renderItem={renderItem}
@@ -145,6 +144,9 @@ const styles = StyleSheet.create({
     lineHeight: 42,
     textAlign: 'center',
     color: 'red',
+  },
+  footer: {
+    paddingBottom: 30,
   },
 });
 

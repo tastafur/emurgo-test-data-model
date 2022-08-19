@@ -44,7 +44,12 @@ export const selectRecipesFormatDropDown = (
     const recipe = {
       value: Number(id),
       label: state.recipes.data[Number(id)].name,
-      ingredients: state.recipes.data[Number(id)].ingredients,
+      ingredients: state.recipes.data[Number(id)].ingredients.map(
+        idIngredient => ({
+          value: state.ingredients.data[idIngredient].id,
+          label: state.ingredients.data[idIngredient].name,
+        }),
+      ),
       allergens,
     };
     if (typeof foodTypeFilter !== 'number') {

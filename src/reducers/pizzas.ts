@@ -1,4 +1,4 @@
-import {SET_PIZZAS} from '../actions/pizzas';
+import {SET_PIZZA, SET_PIZZAS} from '../actions/pizzas';
 import {CLEAN_ORDERS_AND_PIZZAS} from '../actions/clean';
 import {normalizeState} from '../utils/store';
 
@@ -11,6 +11,15 @@ export function pizzas(
   {type, payload}: {type: string; payload: any},
 ) {
   switch (type) {
+    case SET_PIZZA:
+      return {
+        data: {
+          ...state.data,
+          [payload.pizza.id]: {
+            ...payload.pizza,
+          },
+        },
+      };
     case SET_PIZZAS:
       return {
         data: {

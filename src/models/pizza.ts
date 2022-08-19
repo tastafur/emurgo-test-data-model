@@ -12,5 +12,5 @@ export type pizzaType = {
   recipe: number;
   removeIngredients: number[];
   doubleIngredients: number[];
-  calories: number;
+  calories?: number;
 };
