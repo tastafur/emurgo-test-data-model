@@ -1,4 +1,7 @@
-import {SET_ORDER} from '../actions/orders';
+import {SET_ORDER, SET_ORDERS} from '../actions/orders';
+import {CLEAN_ORDERS_AND_PIZZAS} from '../actions/clean';
+
+import {normalizeState} from '../utils/store';
 
 const initialsOrders = {
   data: {},
@@ -18,6 +21,14 @@ export function orders(
           },
         },
       };
+    case SET_ORDERS:
+      return {
+        data: {
+          ...normalizeState(payload.orders),
+        },
+      };
+    case CLEAN_ORDERS_AND_PIZZAS:
+      return initialsOrders;
     default:
       return state;
   }

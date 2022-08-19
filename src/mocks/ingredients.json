@@ -2,46 +2,59 @@
   {
     "id": 1,
     "name": "Mozzarella",
-    "calories": 110
+    "calories": 110,
+    "foodType": 1,
+    "allergen": 7
   },
   {
     "id": 2,
     "name": "Tomato",
-    "calories": 70
+    "calories": 70,
+    "foodType": 4
   },
   {
     "id": 3,
     "name": "Albacha",
-    "calories": 30
+    "calories": 30,
+    "foodType": 4
   },
   {
     "id": 4,
     "name": "Garlic",
-    "calories": 50
+    "calories": 50,
+    "foodType": 4
   },
   {
     "id": 5,
     "name": "Oregano",
-    "calories": 50
+    "calories": 50,
+    "foodType": 4
   },
   {
     "id": 6,
     "name": "Spanish Ham",
-    "calories": 150
+    "calories": 150,
+    "foodType": 2,
+    "allergen": 12
   },
   {
     "id": 7,
     "name": "Spicy salami",
-    "calories": 150
+    "calories": 150,
+    "foodType": 2,
+    "allergen": 12
   },
   {
     "id": 8,
     "name": "Bacon",
-    "calories": 125
+    "calories": 125,
+    "foodType": 2,
+    "allergen": 12
   },
   {
     "id": 9,
     "name": "Onion",
-    "calories": 60
+    "calories": 60,
+    "foodType": 4
   }
 ]

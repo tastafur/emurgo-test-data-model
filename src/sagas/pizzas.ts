@@ -1,8 +1,22 @@
-import {takeLatest, put, call} from 'redux-saga/effects';
+import {takeLatest, put, take, cancel, select, all} from 'redux-saga/effects';
+import * as Effects from 'redux-saga/effects';
+
+const call: any = Effects.call;
+
 import {FETCH_PIZZAS, setPizzas} from '../actions/pizzas';
 
 import pizzas from '../mocks/pizzas.json';
-export function* fetchPizzas() {
+
+// Actions types
+import {FETCH_RECIPES_FINISH} from '../actions/recipes';
+import {FETCH_INGREDIENTS_FINISH} from '../actions/ingredients';
+
+// Selectors
+import {selectRecipesNormalize} from '../selectors/recipes';
+import {selectIngredientsNormalize} from '../selectors/ingredients';
+import {addCaloriesToPizzas} from '../utils/pizzas';
+import {pizzaType} from '../models/pizza';
+export function* fetchPizzas(): Generator {
   try {
     // Show loading with a change state yield put(isLoadingPizzas(true));
     /* Check if you have auth
@@ -25,8 +39,27 @@ export function* fetchPizzas() {
         });
          */
     // Check data and save
+    const checkActions: any = yield all([
+      take(FETCH_RECIPES_FINISH),
+      take(FETCH_INGREDIENTS_FINISH),
+    ]);
+
+    if (checkActions[0].error || checkActions[1].error) {
+      yield cancel();
+    }
+
     if (pizzas.length) {
-      yield put(setPizzas(pizzas));
+      const recipes = yield select(selectRecipesNormalize);
+      const ingredients = yield select(selectIngredientsNormalize);
+
+      const pizzasCalorieFed = (yield call(
+        addCaloriesToPizzas,
+        pizzas,
+        recipes,
+        ingredients,
+      )) as pizzaType[];
+
+      yield put(setPizzas(pizzasCalorieFed));
     }
     // Hide loading with a change state yield put(isLoadingPizzas(false));
   } catch (e) {

@@ -1,5 +1,10 @@
 import {takeLatest, put, call} from 'redux-saga/effects';
-import {FETCH_RECIPES, setRecipes} from '../actions/recipes';
+import {
+  FETCH_RECIPES,
+  fetchRecipesFinish,
+  fetchRecipesFinishError,
+  setRecipes,
+} from '../actions/recipes';
 
 import recipes from '../mocks/recipes.json';
 export function* fetchRecipes() {
@@ -29,9 +34,11 @@ export function* fetchRecipes() {
       yield put(setRecipes(recipes));
     }
     // Hide loading with a change state yield put(isLoadingRecipes(false));
+    yield put(fetchRecipesFinish());
   } catch (e) {
     // Hide loading with a change state yield put(isLoadingRecipes(false));
     // here I would handle errors yield call(errorHandler, {payload: e});
+    yield put(fetchRecipesFinishError(e));
     yield call(console.log, e);
   }
 }
