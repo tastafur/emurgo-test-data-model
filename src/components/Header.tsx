@@ -18,7 +18,7 @@ const Header = () => {
     <ImageBackground
       accessibilityRole="image"
       testID="new-app-screen-header"
-      source={require('../assets/bootsplash_logo.png')}
+      source={require('../assets/bootsplash_logo_4x.png')}
       style={[
         styles.background,
         {
