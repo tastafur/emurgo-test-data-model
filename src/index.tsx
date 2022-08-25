@@ -3,8 +3,7 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import App from './app';
-import {configureStore} from './configureStore';
-const {store, persistor} = configureStore();
+import {store, persistor} from './configureStore';
 
 export default function Index() {
   return (

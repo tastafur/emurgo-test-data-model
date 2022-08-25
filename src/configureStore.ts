@@ -1,6 +1,16 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import {configureStore, compose} from '@reduxjs/toolkit';
+
 import createSagaMiddleware from 'redux-saga';
-import {persistStore, persistReducer} from 'redux-persist';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 import reduxReset from 'redux-reset';
 
@@ -44,25 +54,21 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
-const composeEnhancers = __DEV__
-  ? // @ts-ignore
-    (global.window && global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-    compose
-  : compose;
+const enhancer = compose(reduxReset(CLEAN_STATE_APP));
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(sagaMiddleware),
+  enhancers: [enhancer],
+});
 
-const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware),
-  reduxReset(CLEAN_STATE_APP),
-);
+sagaMiddleware.run(rootSagas);
 
-export const configureStore = () => {
-  const store = createStore(persistedReducer, enhancer);
-
-  sagaMiddleware.run(rootSagas);
-
-  const persistor = persistStore(store);
-
-  return {store, persistor};
-};
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
