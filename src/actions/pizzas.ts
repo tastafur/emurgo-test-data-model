@@ -1,29 +1,21 @@
 import {pizzaType} from '../models/pizza';
 
+import {createAction} from '@reduxjs/toolkit';
+
 export const SET_PIZZAS = 'SET_PIZZAS';
 export const SET_PIZZA = 'SET_PIZZA';
 export const FETCH_PIZZAS = 'FETCH_PIZZAS';
 
-export function fetchPizzas() {
-  return {
-    type: FETCH_PIZZAS,
-  };
-}
+export const fetchPizzas = createAction(FETCH_PIZZAS);
 
-export function setPizzas(pizzas: pizzaType[]) {
-  return {
-    type: SET_PIZZAS,
-    payload: {
-      pizzas,
-    },
-  };
-}
+export const setPizzas = createAction(SET_PIZZAS, (pizzas: pizzaType[]) => ({
+  payload: {
+    pizzas,
+  },
+}));
 
-export function setPizza(pizza: pizzaType) {
-  return {
-    type: SET_PIZZA,
-    payload: {
-      pizza,
-    },
-  };
-}
+export const setPizza = createAction(SET_PIZZA, (pizza: pizzaType) => ({
+  payload: {
+    pizza,
+  },
+}));

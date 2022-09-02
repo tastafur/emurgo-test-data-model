@@ -1,41 +1,33 @@
 import {orderType} from '../models/order';
 import {pizzaType} from '../models/pizza';
 
+import {createAction} from '@reduxjs/toolkit';
+
 export const SET_ORDERS = 'SET_ORDERS';
 export const SET_ORDER = 'SET_ORDER';
 export const FETCH_ORDERS = 'FETCH_ORDERS';
 export const ADD_ORDER = 'ADD_ORDER';
 
-export function fetchOrders() {
-  return {
-    type: FETCH_ORDERS,
-  };
-}
+export const fetchOrders = createAction(FETCH_ORDERS);
 
-export function addOrder(order: orderType, pizza: pizzaType) {
-  return {
-    type: ADD_ORDER,
+export const addOrder = createAction(
+  ADD_ORDER,
+  (order: orderType, pizza: pizzaType) => ({
     payload: {
       order,
       pizza,
     },
-  };
-}
+  }),
+);
 
-export function setOrders(orders: orderType[]) {
-  return {
-    type: SET_ORDERS,
-    payload: {
-      orders,
-    },
-  };
-}
+export const setOrders = createAction(SET_ORDERS, (orders: orderType[]) => ({
+  payload: {
+    orders,
+  },
+}));
 
-export function setOrder(order: orderType) {
-  return {
-    type: SET_ORDER,
-    payload: {
-      order,
-    },
-  };
-}
+export const setOrder = createAction(SET_ORDER, (order: orderType) => ({
+  payload: {
+    order,
+  },
+}));

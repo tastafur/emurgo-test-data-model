@@ -1,22 +1,14 @@
-import {SET_FOOD_TYPES} from '../actions/foodTypes';
+import {createReducer} from '@reduxjs/toolkit';
+
+import {setFoodTypes} from '../actions/foodTypes';
 import {normalizeState} from '../utils/store';
 
 const initialsFoodTypes = {
   data: {},
 };
 
-export function foodTypes(
-  state = initialsFoodTypes,
-  {type, payload}: {type: string; payload: any},
-) {
-  switch (type) {
-    case SET_FOOD_TYPES:
-      return {
-        data: {
-          ...normalizeState(payload.foodTypes),
-        },
-      };
-    default:
-      return state;
-  }
-}
+export const foodTypes = createReducer(initialsFoodTypes, builder => {
+  builder.addCase(setFoodTypes, (state, action) => {
+    state.data = normalizeState(action.payload.foodTypes);
+  });
+});

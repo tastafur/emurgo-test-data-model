@@ -1,34 +1,23 @@
 import {recipeType} from '../models/recipe';
 
+import {createAction} from '@reduxjs/toolkit';
+
 export const SET_RECIPES = 'SET_RECIPES';
 export const FETCH_RECIPES = 'FETCH_RECIPES';
 export const FETCH_RECIPES_FINISH = 'FETCH_RECIPES_FINISH';
 
-export function fetchRecipes() {
-  return {
-    type: FETCH_RECIPES,
-  };
-}
+export const fetchRecipes = createAction(FETCH_RECIPES);
+export const fetchRecipesFinish = createAction(FETCH_RECIPES_FINISH);
+export const fetchRecipesFinishError = createAction(
+  FETCH_RECIPES_FINISH,
+  (error: any) => ({payload: error, error: true}),
+);
 
-export function fetchRecipesFinish() {
-  return {
-    type: FETCH_RECIPES_FINISH,
-  };
-}
-
-export function fetchRecipesFinishError(error: any) {
-  return {
-    type: FETCH_RECIPES_FINISH,
-    payload: error,
-    error: true,
-  };
-}
-
-export function setRecipes(recipes: recipeType[]) {
-  return {
-    type: SET_RECIPES,
+export const setRecipes = createAction(
+  SET_RECIPES,
+  (recipes: recipeType[]) => ({
     payload: {
       recipes,
     },
-  };
-}
+  }),
+);

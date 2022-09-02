@@ -1,19 +1,17 @@
 import {allergenType} from '../models/allergen';
 
-export const SET_ALLERGENS = 'SET_ALLERGENS';
+import {createAction} from '@reduxjs/toolkit';
+
 export const FETCH_ALLERGENS = 'FETCH_ALLERGENS';
+export const SET_ALLERGENS = 'SET_ALLERGENS';
 
-export function fetchAllergens() {
-  return {
-    type: FETCH_ALLERGENS,
-  };
-}
+export const fetchAllergens = createAction(FETCH_ALLERGENS);
 
-export function setAllergens(allergens: allergenType[]) {
-  return {
-    type: SET_ALLERGENS,
+export const setAllergens = createAction(
+  SET_ALLERGENS,
+  (allergens: allergenType[]) => ({
     payload: {
       allergens,
     },
-  };
-}
+  }),
+);

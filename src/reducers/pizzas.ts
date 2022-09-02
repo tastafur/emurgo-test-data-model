@@ -1,34 +1,25 @@
-import {SET_PIZZA, SET_PIZZAS} from '../actions/pizzas';
-import {CLEAN_ORDERS_AND_PIZZAS} from '../actions/clean';
-import {normalizeState} from '../utils/store';
+import {createReducer} from '@reduxjs/toolkit';
 
-const initialsPizzas = {
+import {setPizza, setPizzas} from '../actions/pizzas';
+import {cleanOrdersAndPizzas} from '../actions/clean';
+
+import {normalizeState} from '../utils/store';
+import {pizzaType} from '../models/pizza';
+
+const initialsPizzas: {data: {[key: number]: pizzaType}} = {
   data: {},
 };
 
-export function pizzas(
-  state = initialsPizzas,
-  {type, payload}: {type: string; payload: any},
-) {
-  switch (type) {
-    case SET_PIZZA:
-      return {
-        data: {
-          ...state.data,
-          [payload.pizza.id]: {
-            ...payload.pizza,
-          },
-        },
-      };
-    case SET_PIZZAS:
-      return {
-        data: {
-          ...normalizeState(payload.pizzas),
-        },
-      };
-    case CLEAN_ORDERS_AND_PIZZAS:
-      return initialsPizzas;
-    default:
-      return state;
-  }
-}
+export const pizzas = createReducer(initialsPizzas, builder => {
+  builder
+    .addCase(setPizzas, (state, action) => {
+      state.data = normalizeState(action.payload.pizzas);
+    })
+    .addCase(setPizza, (state, action) => {
+      const {id} = action.payload.pizza;
+      state.data[id] = action.payload.pizza;
+    })
+    .addCase(cleanOrdersAndPizzas, state => {
+      state.data = initialsPizzas.data;
+    });
+});
